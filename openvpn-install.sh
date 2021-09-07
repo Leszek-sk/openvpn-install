@@ -270,7 +270,7 @@ port $port
 proto $protocol
 dev tun
 ca ca.crt
-server server.crt
+cert server.crt
 key server.key
 dh dh.pem
 topology subnet
