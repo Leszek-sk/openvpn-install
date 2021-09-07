@@ -273,8 +273,7 @@ ca ca.crt
 cert server.crt
 key server.key
 dh dh.pem
-auth SHA1
-tls-auth tc.key
+tls-auth tc.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0" > /etc/openvpn/server/server.conf
 	# IPv6
@@ -323,11 +322,13 @@ server 10.8.0.0 255.255.255.0" > /etc/openvpn/server/server.conf
 	esac
 	echo "keepalive 10 120
 cipher AES-256-CBC
+auth SHA1
 user nobody
 group $group_name
 persist-key
 persist-tun
 verb 3
+key-direction 1
 crl-verify crl.pem" >> /etc/openvpn/server/server.conf
 	if [[ "$protocol" = "udp" ]]; then
 		echo "explicit-exit-notify" >> /etc/openvpn/server/server.conf
