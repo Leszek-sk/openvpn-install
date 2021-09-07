@@ -273,6 +273,7 @@ ca ca.crt
 cert server.crt
 key server.key
 dh dh.pem
+remote-cert-tls client
 tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0" > /etc/openvpn/server/server.conf
