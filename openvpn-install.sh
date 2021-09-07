@@ -270,11 +270,9 @@ port $port
 proto $protocol
 dev tun
 ca ca.crt
-cert server.crt
+server server.crt
 key server.key
 dh dh.pem
-remote-cert-tls client
-tls-auth ta.key 0
 topology subnet
 server 10.8.0.0 255.255.255.0" > /etc/openvpn/server/server.conf
 	# IPv6
@@ -322,14 +320,19 @@ server 10.8.0.0 255.255.255.0" > /etc/openvpn/server/server.conf
 		;;
 	esac
 	echo "keepalive 10 120
+client-config-dir /etc/openvpn/server/ccd
+push "redirect-gateway def1 bypass-dhcp"
 cipher AES-256-CBC
 auth SHA1
 user nobody
 group $group_name
 persist-key
 persist-tun
+status /var/log/openvpn/openvpn-status.log
+log /var/log/openvpn/openvpn.log
 verb 3
-crl-verify crl.pem" >> /etc/openvpn/server/server.conf
+explicit-exit-notify 0
+" >> /etc/openvpn/server/server.conf
 	if [[ "$protocol" = "udp" ]]; then
 		echo "explicit-exit-notify" >> /etc/openvpn/server/server.conf
 	fi
