@@ -322,6 +322,7 @@ server 10.8.0.0 255.255.255.0" > /etc/openvpn/server/server.conf
 	echo "keepalive 10 120
 client-config-dir /etc/openvpn/server/ccd
 push "redirect-gateway def1 bypass-dhcp"
+ifconfig-pool-persist ipp.txt
 cipher AES-256-CBC
 auth SHA1
 user nobody
